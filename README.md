@@ -2,9 +2,11 @@
 
 TODO
 
+#### I wrote this in a hurry for getting my course specific live class, so might need some enhancements which I will look after my exams.
+
 ## Development
 
-We use `node` version `12.16.1`
+We use `node` version `15.x`
 
 The first time, you will need to run
 
@@ -30,66 +32,6 @@ _If you run this command without any additional flags, you’ll install the file
 
 _Hopefully, that’s all it will take for you to get everything installed._
 
-# API Validation
-
- By using celebrate the req.body schema becomes clary defined at route level, so even frontend devs can read what an API endpoint expects without need to writting a documentation that can get outdated quickly.
-
- ```js
- route.post('/signup',
-  celebrate({
-    body: Joi.object({
-      name: Joi.string().required(),
-      email: Joi.string().required(),
-      password: Joi.string().required(),
-    }),
-  }),
-  controller.signup)
- ```
-
- **Example error**
-
- ```json
- {
-  "errors": {
-    "message": "child \"email\" fails because [\"email\" is required]"
-  }
- }
- ```
-
-[Read more about celebrate here](https://github.com/arb/celebrate) and [the Joi validation API](https://github.com/hapijs/joi/blob/v15.0.1/API.md)
-
-**Some important mongodb commands:**
-
-1. To take a dump of local db
-```bash
-mongodump --db <dbName>
-```
-
-2. To restore a dump in local db
-```bash
-mongorestore --db <TorestoreInDbName> --verbose folder/path/of/dump/files
-
-E.x: mongorestore --db googolplexProd --verbose dump/prod
-```
-
-3. To restore a particular collection in local db
-```bash
-mongorestore --db <TorestoreInDbName> --verbose --collection <collectionName>  path/to/collection.bson --drop
-
-E.x: mongorestore --db googolplexProd --verbose --collection users  dump/prod/users.bson --drop
-```
-
-4. To take a dump of remote db
-```bash
-mongodump --host <dbUrl> --ssl --username <uname> --password <password> --authenticationDatabase admin --db <dbName>
-
-e.x: mongodump --host Cluster0-shard-0/cluster0-shard-00-00-ogymv.mongodb.net:27017,cluster0-shard-00-01-ogymv.mongodb.net:27017,cluster0-shard-00-02-ogymv.mongodb.net:27017 --ssl --username arghya --password 123456 --authenticationDatabase admin --db prod
-```
-
-4. To restore a particualr collection in remote db
-```bash
-mongorestore --host Cluster0-shard-0/cluster0-shard-00-00-ogymv.mongodb.net:27017,cluster0-shard-00-01-ogymv.mongodb.net:27017,cluster0-shard-00-02-ogymv.mongodb.net:27017 --ssl --username arghya --password 123456 --authenticationDatabase admin --db test --verbose dump/prod
-```
 
 # Roadmap
 TODO
