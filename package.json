@@ -4,7 +4,7 @@
   "description": "Get course specific events",
   "main": "src/app.ts",
   "scripts": {
-    "build": "npm-run-all clean tsc",
+    "build": "npm-run-all clean tsc downloadCreds",
     "clean": "rimraf build/*",
     "downloadCreds": "ts-node src/downloadCredentials",
     "heroku-postbuild": "npm run build",
