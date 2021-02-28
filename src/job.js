@@ -1,8 +1,8 @@
-var request = require('request')
+var axios = require('axios')
 const dotenv = require('dotenv');
 dotenv.config({ path: __dirname + '/../.env' });
 
 async function updateTodaysClass() {
-  await request(process.env.UPDATE_URL);
+  await axios.get(process.env.UPDATE_URL);
 }
 updateTodaysClass();

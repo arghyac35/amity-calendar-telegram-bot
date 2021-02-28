@@ -32,10 +32,14 @@ export default (app: Router) => {
       const message = await calendarServiceInstance.getTodaysEvents();
 
       const bot = Container.get('tgBot') as Telegraf;
-      await bot.telegram.sendMessage(172556296, message, {
-        parse_mode: 'HTML',
-        disable_web_page_preview: true
-      });
+      let authChats = config.authorizedChats ? config.authorizedChats.split(',').map(chatId => Number(chatId)) : []
+      for (let index = 0; index < authChats.length; index++) {
+        const element = authChats[index];
+        await bot.telegram.sendMessage(element, message, {
+          parse_mode: 'HTML',
+          disable_web_page_preview: true
+        });
+      }
       res.sendStatus(200);
     } catch (e) {
       logger.error('🔥 error: %o', e);
