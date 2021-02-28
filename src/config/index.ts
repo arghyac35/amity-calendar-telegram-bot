@@ -30,5 +30,11 @@ export default {
     prefix: '/api',
   },
 
-  tgBotToken: process.env.BOTTOKEN,
+  tgBotToken: process.env.BOT_TOKEN,
+  domain: process.env.DOMAIN,
+  sudoUsers: process.env.SUDO_USERS,
+  authorizedChats: process.env.AUTHORIZED_CHATS,
+  telegraphToken: process.env.TELEGRAPH_TOKEN,
+  clientSecretUrl: process.env.CLIENT_SECRET,
+  credentialsUrl: process.env.CREDENTIALS
 };

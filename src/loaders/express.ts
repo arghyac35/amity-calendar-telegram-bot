@@ -3,8 +3,13 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import routes from '../api';
 import config from '../config';
+import { Telegraf } from 'telegraf'
+import { Container } from 'typedi';
 
 export default async ({ app }: { app: express.Application }): Promise<any> => {
+
+  const bot = Container.get('tgBot') as Telegraf;
+
   /**
    * Health Check endpoints
    * @TODO Explain why they are here
@@ -37,6 +42,13 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
 
   // Load API routes
   app.use(config.api.prefix, routes());
+
+  if (process.env.NODE_ENV === 'production') {
+    bot.telegram.setWebhook(`${config.domain}${config.api.prefix}/botUpdates/${config.tgBotToken}`);
+    app.use(bot.webhookCallback(`${config.api.prefix}/botUpdates/${config.tgBotToken}`))
+  } else {
+    bot.launch();
+  }
 
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {
