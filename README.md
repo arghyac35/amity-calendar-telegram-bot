@@ -2,7 +2,7 @@
 
 TODO
 
-#### I wrote this in a hurry for getting my course specific live class, so might need some enhancements which I will look after my exams.
+#### I wrote this in hurry for getting my course specific live class, so might need some enhancements which I will look after my exams.
 
 ## Development
 

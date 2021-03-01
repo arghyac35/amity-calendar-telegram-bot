@@ -45,7 +45,7 @@ export default class GoogleCalendarService {
     if (events.length) {
       return this.createTgMessage(events, start.toLocaleDateString());
     } else {
-      throw new Error('No upcoming events found.');
+      return 'No class found for today.';
     }
   }
 
