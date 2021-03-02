@@ -133,11 +133,11 @@ export default class GoogleCalendarService {
     }
 
     eventItems.forEach(e => {
-      let start = '';
+      let start: Date = null;
       if (e.start.dateTime) {
-        start = new Date(e.start.dateTime).toDateString()
+        start = new Date(e.start.dateTime);
       }
-      msg += `<b>${e.summary}</b> at <b>${start}</b>: <a href='${e.hangoutLink}'>Meet Link</a>`;
+      msg += `<b>${e.summary}</b> at <b>${start ? start.toDateString() + ' ' + start.toLocaleTimeString() : ''}</b>: <a href='${e.hangoutLink}'>Meet Link</a>`;
       if (e.attachments) {
         const videoUrl = e.attachments.filter(attachment => attachment.mimeType === 'video/mp4');
         if (videoUrl.length) {
