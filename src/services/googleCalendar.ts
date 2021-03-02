@@ -43,7 +43,7 @@ export default class GoogleCalendarService {
 
     const events = calList.filter(d => d.description && this.checkMyCourse(d.description));
     if (events.length) {
-      return this.createTgMessage(events, start.toLocaleDateString());
+      return this.createTgMessage(events, start.toDateString());
     } else {
       return 'No class found for today.';
     }
@@ -137,7 +137,7 @@ export default class GoogleCalendarService {
       if (e.start.dateTime) {
         start = new Date(e.start.dateTime);
       }
-      msg += `<b>${e.summary}</b> at <b>${start ? start.toDateString() + ' ' + start.toLocaleTimeString() : ''}</b>: <a href='${e.hangoutLink}'>Meet Link</a>`;
+      msg += `<b>${e.summary}</b> at <b>${start ? start.toDateString() + ' ' + start.toTimeString() : ''}</b>: <a href='${e.hangoutLink}'>Meet Link</a>`;
       if (e.attachments) {
         const videoUrl = e.attachments.filter(attachment => attachment.mimeType === 'video/mp4');
         if (videoUrl.length) {
