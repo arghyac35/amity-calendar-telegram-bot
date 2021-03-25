@@ -19,7 +19,7 @@ export default class GoogleCalendarService {
     @Inject('tgBot') private bot: Telegraf
   ) { }
   private courses = ['MASTER  OF BUSINESS ADMINISTRATION', 'MASTER OF BUSINESS ADMINISTRATION'];
-  private semKey = ['Sem I', 'Sem 1', 'Sem i', 'Sem I/ II', 'Semester - I', 'Sem - I', 'Semeseter I']
+  private semKey = ['Sem II', 'Sem 2', 'Sem ii', 'Semester - II', 'Sem - II', 'Semeseter II', 'Semester - ii', 'Sem - ii', 'Sem -II']
 
   async auth() {
     return await driveAuth.call().then(async (auth: OAuth2Client) => {
@@ -157,9 +157,9 @@ export default class GoogleCalendarService {
     return msg;
   }
 
-  private checkMyCourse(desc: string): Boolean {
+  private checkMyCourse(desc: string): boolean {
     // desc = desc.replace(/[\r\n]+/gm, " ");
-    return this.courses.some(d => wordInString(desc.toLowerCase(), d.toLowerCase()));
+    return this.courses.some(d => wordInString(desc.toLowerCase(), d.toLowerCase())) && this.semKey.some(d => wordInString(desc.toLowerCase(), d.toLowerCase()));
   }
 
   public async calendarListEvents(qs: calendar_v3.Params$Resource$Events$List) {
