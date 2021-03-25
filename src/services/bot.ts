@@ -67,6 +67,31 @@ export default () => {
       sendMessage(ctx, ctx.message, await calendarServiceInstance.getUpcomingClass(), 60000).catch(console.log);
     }
   })
+
+  bot.hears(/^[/|.](help|h)$/i, async (ctx) => {
+
+    if (isAuthorized(ctx.message) < 0) {
+      sendUnauthorizedMessage(ctx, ctx.message);
+    } else {
+      const text = `
+      This bot is only for Amity online MBA course
+      <b>Command ｜ Description</b>
+      ➖➖➖➖➖➖➖➖➖➖➖➖
+      <code>/todaysClass</code> or <code>/tc</code> <b>|</b> Shows today's class for current Semester
+      ➖➖➖➖➖➖➖➖➖➖➖➖
+      <code>/classFormTo </code>date or <code>/cft </code>date <b>|</b> Shows classes from to date. Example dates:
+      * /cft 2020-10-15:2021-01-31 - It will show classes from 15th October 2020 till 31st Jan 2021
+      * /cft 2020-10:2021-01 - It will show from 1st Oct 2020 till 31st Jan 2021
+      * /cft 2020-10 - It will show from 1st Oct 2020 till Current date
+      ➖➖➖➖➖➖➖➖➖➖➖➖
+      <code>/upcoming</code> or <code>/up</code> <b>|</b> Shows upcoming classess till next 7days
+      ➖➖➖➖➖➖➖➖➖➖➖➖
+      <code>/help</code> or <code>/h</code> <b>|</b> You already know what it does.
+      ➖➖➖➖➖➖➖➖➖➖➖➖\n<i>Note: All the above command can also be called using dot(.) instead of slash(/). For e.x: <code>.todaysClass</code> or <code>.tc</code></i>
+      `;
+      sendMessage(ctx, ctx.message, text, 60000).catch(console.log);
+    }
+  })
 }
 
 
